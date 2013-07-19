@@ -13,19 +13,30 @@ In your web page:
 
 ```html
 <script src="jquery.js"></script>
-<script src="dist/backfilljs.min.js"></script>
+<script src="dist/backfill.min.js"></script>
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+  $("#myelement").backfill(); // ""
 });
 </script>
 ```
 
 ## Documentation
-_(Coming soon)_
+The plugin simply takes the jQuery element and stretches the height to the full height of the window, calculating and padding in the process.
 
-## Examples
-_(Coming soon)_
+The plugin accepts one option, a number, to offset the height by, if you have a main navigation bar you want to factor into the calculation, for example.`
 
+## Examples 
+Subtracting the height of your navigation from the height applied to our element
+
+```html
+<script>
+jQuery(function($) {
+  $("#myelement").backfill({
+        offset: $( '.navbar').height()
+    });
+});
+</script>
+```
 ## Release History
 _(Nothing yet)_
