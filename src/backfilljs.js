@@ -15,8 +15,7 @@
   // Create the defaults once
   var backfill = 'backfill',
       defaults = {
-        marginTop: false,
-        marginBottom: false
+        offset: false
       };
 
   // The actual Backfill constructor
@@ -47,12 +46,26 @@
 
       // get and set the window width minus any offsets
       var options = this.options,
-          userSum = this.sum(options.marginTop, options.marginBottom);
+          userOffset = this.options.offset,
+          
+          // Our number matching Regex
+          r = /\d+/,
+
+          // Grab padding top and padding bottom CSS value, pull out the numbers and parse as numbers
+          paddingTop = parseInt( $(this.element).css("paddingTop").match(r)[0], 10),
+          paddingBottom = parseInt( $(this.element).css("paddingBottom").match(r)[0], 10),
+
+          // Now cast as numbers, we can total up the padding of each div..
+          totalPadding = this.sum( paddingTop, paddingBottom );
+
+          // And the total offset
+          userOffset += totalPadding;
+
 
       var that = this;
 
       $(window).on( "load resize", function () {
-        var window_height = $(window).height() - userSum;
+        var window_height = $(window).height() - userOffset;
         that.resize(that.element, window_height);
       });
     },
@@ -62,11 +75,6 @@
     },
 
     sum: function() {
-      
-      function isNumber(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-      }      
-
       var i = 0,
         args = arguments,
         total = 0;
@@ -77,6 +85,10 @@
         }
       }
       return total;
+
+      function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
     },
 
     hasOptions: function() {
