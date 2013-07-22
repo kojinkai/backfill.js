@@ -26,7 +26,6 @@ The plugin simply takes the jQuery element and stretches the height to the full 
 
 The plugin accepts one option, a number, to offset the height by, if you have a main navigation bar you want to factor into the calculation, for example.`
 
-## Examples 
 Subtracting the height of your navigation from the height applied to our element
 
 ```html
@@ -38,5 +37,6 @@ jQuery(function($) {
 });
 </script>
 ```
+
 ## Release History
 _(Nothing yet)_
